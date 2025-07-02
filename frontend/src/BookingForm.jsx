@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "./config";
 
 function BookingForm() {
   const [name, setName] = useState("");
@@ -7,7 +8,7 @@ function BookingForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8000/bookings/", {
+    const response = await fetch(`${API_BASE_URL}/bookings/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, datetime }),
