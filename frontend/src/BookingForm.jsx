@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { API_BASE_URL } from "./config";
+import {API_BASE_URL} from "./config.js";
 
 function BookingForm() {
   const [name, setName] = useState("");

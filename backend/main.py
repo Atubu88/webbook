@@ -1,10 +1,12 @@
+from typing import List
+
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from models import Booking
-from schemas import BookingCreate
+from schemas import BookingCreate, BookingOut
 from database import engine, Base, SessionLocal
-from crud import create_booking
+from crud import create_booking, get_all_bookings
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
@@ -33,3 +35,8 @@ def get_db():
 def create_new_booking(booking: BookingCreate, db: Session = Depends(get_db)):
     new_booking = create_booking(db=db, booking=booking)
     return new_booking
+
+@app.get("/bookings/", response_model=list[BookingOut])
+def list_bookings(db: Session = Depends(get_db)):
+    """Return all bookings."""
+    return get_all_bookings(db)

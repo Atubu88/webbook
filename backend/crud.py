@@ -12,3 +12,7 @@ def create_booking(db: Session, booking: BookingCreate):
     db.commit()
     db.refresh(db_booking)
     return db_booking
+
+def get_all_bookings(db: Session):
+    """Return all bookings ordered by id."""
+    return db.query(Booking).order_by(Booking.id).all()
